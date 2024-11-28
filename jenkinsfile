@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        SCANNER_HOME = tool 'SonarScanner'
+        SCANNER_HOME = tool 'sonar-scanner'
     }
     stages {
         stage('Clean Workspace') {
@@ -18,7 +18,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') { // Replace 'SonarQube' with your SonarQube server configuration name
+                    withSonarQubeEnv('sonar-server') { // Replace 'SonarQube' with your SonarQube server configuration name
                         sh "${SCANNER_HOME}/bin/sonar-scanner"
                     }
                 }
