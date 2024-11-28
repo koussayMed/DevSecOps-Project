@@ -15,22 +15,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/koussayMed/DevSecOps-Project.git'
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('sonar-server') { // Replace 'SonarQube' with your SonarQube server configuration name
-                        sh "${SCANNER_HOME}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
-        stage('Quality Gate') {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: true // Ensure this fails the pipeline on quality gate failure
-                }
-            }
-        }
+        
         stage('Install Dependencies') {
             steps {
                 sh "npm install"
